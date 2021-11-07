@@ -1,9 +1,9 @@
 const service = require('../../services/buscape');
 
 const getProducts = async (req, res) => {
-  const { category, search, web } = req.body;
+  const { category, query, webSite } = req.body;
   const data = {
-    category, web, search,
+    category, webSite, query,
   };
   const response = await service.getProducts(data);
 

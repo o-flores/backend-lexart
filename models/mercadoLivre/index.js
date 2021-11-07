@@ -35,22 +35,22 @@ const formatInfo = async (productsList) => {
 
 const getProducts = async (data) => {
   const {
-    category, search, web, categoryId,
+    category, query, webSite, categoryId,
   } = data;
   const db = await getConnection();
 
-  const productsList = await verifiesIfSearchAlreadyExists(category, search, web);
+  const productsList = await verifiesIfSearchAlreadyExists(category, query, webSite);
   if (productsList) return productsList.results;
 
-  const allproductsInfo = await fetchProductsByCategoryAndQuery(categoryId, search);
+  const allproductsInfo = await fetchProductsByCategoryAndQuery(categoryId, query);
   if (allproductsInfo.message) return allproductsInfo;
 
   const productsInfo = await formatInfo(allproductsInfo);
 
   const dbInfo = {
     category,
-    search,
-    web,
+    query,
+    webSite,
     results: productsInfo,
   };
 
